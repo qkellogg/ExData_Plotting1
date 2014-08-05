@@ -5,9 +5,10 @@ power.all<-read.table(file="household_power_consumption.txt",header=TRUE,sep=";"
 ## Subset data for Feb 1 and 2, 2007
 power<-subset(power.all,(power.all$Date=="1/2/2007"|power.all$Date=="2/2/2007"))
 ##
-## Combine date and time columns
+## Combine date and time columns and convert to POSIXlt class
 power$DateTime<-paste(power$Date,power$Time,sep=" ")
 power$DateTime<-strptime(power$DateTime,format="%d/%m/%Y %H:%M:%S")
+## Convert columns 3 through 9 to numeric class
 for (i in 3:9){
         power[,i]<-as.numeric(power[,i])
 }
